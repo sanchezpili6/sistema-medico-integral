@@ -2,7 +2,8 @@
   <v-container fluid class="ma-0 pa-0">
     <DoctorNavBar></DoctorNavBar>
     <v-card class="text-center">
-      <v-card-title class="my-3"><v-spacer></v-spacer><h1>Pacientes</h1><v-spacer></v-spacer></v-card-title>
+      <v-card-title class="my-3"><v-spacer></v-spacer><h1>MI EQUIPO</h1><v-spacer></v-spacer></v-card-title>
+      <v-card-subtitle class="my-3"><v-spacer></v-spacer><h1>Código de equipo: {{teamCode}}</h1><v-spacer></v-spacer></v-card-subtitle>
       <v-card-text>
         <v-simple-table>
           <template v-slot:default>
@@ -12,72 +13,49 @@
                 Nombre
               </th>
               <th class="text-center">
-                Póliza seguro
+                Especialidad
               </th>
-              <th></th>
-              <th></th>
             </tr>
             </thead>
             <tbody>
             <tr
-                v-for="item in patients"
+                v-for="item in team"
                 :key="item.name"
             >
               <td>{{ item.name }}</td>
-              <td>{{ item.poliza }}</td>
-              <td>
-                <v-btn color="green">Historial</v-btn>
-              </td>
-              <td>
-                <v-btn color="green">Recetas</v-btn>
-              </td>
+              <td>{{ item.specialty }}</td>
             </tr>
             </tbody>
           </template>
         </v-simple-table>
       </v-card-text>
     </v-card>
-    <router-link to="/registration">
-      <v-btn
-          absolute
-          fab
-          large
-          bottom
-          right
-          class="my-10"
-          color="green"
-      >
-        <v-icon color="white" x-large>mdi-plus</v-icon>
-      </v-btn>
-    </router-link>
   </v-container>
 </template>
 
 <script>
 import DoctorNavBar from "./DoctorNavBar";
 export default {
-  name: "MyPatients",
+  name: "MyTeam",
   components:{
     DoctorNavBar
   },
   data () {
     return {
-      patients: [
+      teamCode: 1,
+      team: [
         {
           name: 'Jackie bb',
-          poliza: 1234
-        },
-        {
+          specialty: 'cardiología'
+        },{
           name: 'Jackie bb',
-          poliza: 1234
-        },
-        {
+          specialty: 'cardiología'
+        },{
           name: 'Jackie bb',
-          poliza: 1234
-        },
-        {
+          specialty: 'cardiología'
+        },{
           name: 'Jackie bb',
-          poliza: 1234
+          specialty: 'cardiología'
         },
       ],
     }
@@ -86,4 +64,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>
