@@ -33,7 +33,7 @@
 
 <script>
 import DoctorNavBar from "../doctors/DoctorNavBar";
-let API_URL= 'https://16fe-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
+let API_URL= 'https://c775-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
 export default {
   name: "Prescription",
   components:{
@@ -43,7 +43,7 @@ export default {
     //docID: Number,
   },
   data: () => ({
-    docID:9,
+    docID:1,
     patientID:2,
     treatment: '',
     postId: -1,

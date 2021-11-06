@@ -24,7 +24,7 @@
                 :key="item.name"
             >
               <td>{{ item.name }}</td>
-              <td>{{ item.poliza }}</td>
+              <td>{{ item.policy }}</td>
               <td>
                 <v-btn color="green">Historial</v-btn>
               </td>
@@ -56,15 +56,29 @@
 
 <script>
 import DoctorNavBar from "./DoctorNavBar";
+import axios from "axios";
+let API_URL= 'https://53e6-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
 export default {
+  async beforeCreate() {
+    const response = await axios.get(API_URL + '/api/doctor/patients',  {params: {pk: 1}});//.then(response => this.totalVuePackages = response.data.total);
+    console.log(response.data);
+    this.patients=response.data;
+  },
   name: "MyPatients",
   components:{
     DoctorNavBar
   },
+  props: {
+    //patients: Array,
+  },
+  methods:{
+
+  },
   data () {
     return {
-      docId:3,
-      patients: [
+      docId:1,
+      patients: [],
+      /*patients: [
         {
           name: 'Jackie bb',
           poliza: 1234
@@ -81,7 +95,7 @@ export default {
           name: 'Jackie bb',
           poliza: 1234
         },
-      ],
+      ],*/
     }
   },
 }

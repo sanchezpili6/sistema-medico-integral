@@ -19,8 +19,26 @@
 </template>
 
 <script>
+import axios from "axios";
+let API_URL= 'https://c775-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
 export default {
-  name: "DoctorNavBar"
+  name: "DoctorNavBar",
+  data () {
+    return {
+      docId:1,
+    }
+  },
+  methods:{
+    async getPatients(){
+      console.log("get");
+      // GET request using axios with set headers
+      const headers = { "Content-Type": "application/json" };
+      const response = await axios.get(API_URL + '/api/doctor/patients', {headers}, {params: this.docId});//.then(response => this.totalVuePackages = response.data.total);
+      console.log(response);
+      console.log("get");
+    },
+
+  }
 }
 </script>
 
