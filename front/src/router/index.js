@@ -7,16 +7,14 @@ import MedicalHistory from "../views/patients/MedicalHistory";
 import MyPatients from "../views/doctors/MyPatients";
 import MyTeam from "../views/doctors/MyTeam";
 import MyProfile from "../views/doctors/MyProfile";
+import Welcome from "../views/Welcome";
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    //component: Home
-    //component: Registration
-    //component: DoctorRegistration
-    component: MedicalHistory
+    component: Welcome
   },
   {
     path: '/registration',
