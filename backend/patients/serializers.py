@@ -8,3 +8,13 @@ class PatientSerializer(serializers.ModelSerializer):
         """Define the class behavior"""
         model = Patient
         fields = '__all__'
+
+class ListPatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        """Define the class behavior"""
+        model = Patient
+        fields = [
+            'pk',
+            'name',
+            'nss'
+        ]

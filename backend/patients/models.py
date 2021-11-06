@@ -22,6 +22,10 @@ class Patient(models.Model):
         unique=True,
         verbose_name='poliza seguros'
     )
+    # Agregar relacion con doctor 
+    def __str__(self):
+        """Return the representation in string"""
+        return self.name
 
     class Meta:
         """Define the behavior of Model."""
