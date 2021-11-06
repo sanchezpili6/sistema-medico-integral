@@ -1,5 +1,7 @@
 from app.urls import router
-from doctor.models import Team
+import doctor
+from doctor.models import Doctor, Team
+from patients.models import Patient
 
 
 from rest_framework import mixins, status, viewsets
@@ -39,6 +41,28 @@ class DoctorViewSet(viewsets.GenericViewSet,
             status=status.HTTP_201_CREATED
         )
 
+class DoctorLoginViewSet(viewsets.GenericViewSet,
+                         BaseGenericViewSet):
+
+    serializer_class = serializers.DoctorSerializer
+
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        certificate = request.data['certificate']
+        try:
+            doctor= Doctor.objects.get(certificate=certificate)
+        except Doctor.DoesNotExist:
+            return Response(
+                    data={'Doctor no dado de alta'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+    
+        serializer = self.get_serializer(doctor)
+        return Response(
+            data=serializer.data,
+            status=status.HTTP_201_CREATED
+        )
 
 class TeamViewSet(ListModelMixin,
                   viewsets.GenericViewSet,
@@ -51,11 +75,18 @@ class TeamViewSet(ListModelMixin,
     queryset = Team.objects.all()
 
 
+class PatientsViewSet(ListModelMixin,
+                      viewsets.GenericViewSet,
+                      BaseGenericViewSet):
 
+    list_serializer_class = serializers.PatientsSerializer
 
-# recibir el nss del paciente y hacer la realcion 
+    permission_classes = [AllowAny]
 
-# iniciar sesion regresar el id 
+    def get_queryset(self):
+        pk = self.request.query_params.get('pk')
+        return Patient.objects.filter(doctor=pk)
+
 
 router.register(
     r'doctor/create',
@@ -64,8 +95,21 @@ router.register(
 )
 
 router.register(
+    r'doctor/login',
+    DoctorLoginViewSet,
+    basename="doctor-login"
+)
+
+router.register(
     r'doctor/teams',
     TeamViewSet,
     basename="doctor-team"
 )
 
+
+
+router.register(
+    r'doctor/patients',
+    PatientsViewSet,
+    basename="doctor-patients"
+)

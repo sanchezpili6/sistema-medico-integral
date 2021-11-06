@@ -86,7 +86,7 @@ class PDFViewSet(mixins.CreateModelMixin,
                 ln = 1, align = 'C')
 
         
-        pdf.cell(200, 30, txt = "Paciente: " + prescription.patient.name + prescription.patient.last_name,
+        pdf.cell(200, 30, txt = "Paciente: " + prescription.patient.name + " " + prescription.patient.last_name,
                 ln = 2, align = 'L')
 
         pdf.cell(200, 30, txt = "Nombre médico: " + prescription.doctor.name,

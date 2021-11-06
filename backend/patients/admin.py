@@ -12,6 +12,7 @@ class PatientAdmin(admin.ModelAdmin):
         'last_name',
         'nss',
         'policy',
+        'doctor'
     ]
 
 admin.site.register(Patient, PatientAdmin)

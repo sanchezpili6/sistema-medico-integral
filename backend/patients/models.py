@@ -1,5 +1,7 @@
 from django.db import models
 
+from doctor.models import Doctor
+
 # Create your models here.
 class Patient(models.Model):
 
@@ -22,7 +24,13 @@ class Patient(models.Model):
         unique=True,
         verbose_name='poliza seguros'
     )
-    # Agregar relacion con doctor 
+    doctor = models.ForeignKey(
+        Doctor,
+        on_delete=models.CASCADE,
+        verbose_name='medico',
+        null=True,
+        blank=True,
+    )
     def __str__(self):
         """Return the representation in string"""
         return self.name

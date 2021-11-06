@@ -141,7 +141,7 @@ JWT_AUTH_HEADER_PREFIX = 'Bearer'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'd730-2806-2f0-9000-f884-3c43-128c-f17d-cfb9.ngrok.io'
+    'e1aa-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io'
 
 ]
 

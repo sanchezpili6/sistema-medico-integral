@@ -28,6 +28,8 @@ class RetrievePrescriptionSerializer(serializers.ModelSerializer):
         ]
 
     def get_treatments(self, instance):
+
+        # Agregar la medicina al hisotrial de tratamiento 
         response_treatments = {}
         response = ""
         doctor = instance.doctor

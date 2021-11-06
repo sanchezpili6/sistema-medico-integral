@@ -36,11 +36,37 @@ class PatientViewSet(ListModelMixin,
             status=status.HTTP_201_CREATED
         )
 
+class PatientLoginViewSet(viewsets.GenericViewSet,
+                         BaseGenericViewSet):
 
-        
+    list_serializer_class = serializers.PatientSerializer
 
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        nss = request.data['nss']
+        try:
+            patient = Patient.objects.get(nss=nss)
+        except Patient.DoesNotExist:
+            return Response(
+                    data={'Paciente no dado de alta'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+    
+        serializer = self.get_serializer(patient)
+        return Response(
+            data=serializer.data,
+            status=status.HTTP_201_CREATED
+        )
+    
 router.register(
     r'patient/create',
     PatientViewSet,
     basename="patient"
+)
+
+router.register(
+    r'patient/login',
+    PatientLoginViewSet,
+    basename="patient-login"
 )
