@@ -35,7 +35,7 @@
               <v-card-text>Cédula profesional</v-card-text>
             </v-col>
             <v-col cols="8">
-              <v-text-field v-model="license" required></v-text-field>
+              <v-text-field v-model="doctorId" required></v-text-field>
             </v-col>
           </v-row>
           <v-row v-show="admin">
@@ -62,7 +62,8 @@
 </template>
 
 <script>
-let API_URL= 'https://e1aa-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
+import router from "../router";
+let API_URL= 'https://6719-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
 import NavBar from "./NavBar";
 export default {
   name: "Login",
@@ -71,38 +72,54 @@ export default {
   },
   data(){
     return{
+      doctorName: '',
+      specialty: '',
+      college: '',
+      affiliation: '',
       nss: '',
-      license: '',
+      doctorId: '',
       email: '',
+      doctorResponse:null,
       patient: false,
       doctor: false,
-      admin: false
+      admin: false,
+      dialog: false
+    }
+  },
+  watch:{
+    doctorId(newDoctorId){
+      localStorage.doctorId = newDoctorId
+    },
+    doctorResponse(newDoctorName){
+      localStorage.doctorName = newDoctorName
     }
   },
   methods:{
     async login_doctor(){
-      if(this.license!=''){
+      if(this.doctorId!=''){
         this.dialog=false;
         // POST request using fetch with async/await
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({certificate: this.license})
+          body: JSON.stringify({certificate: this.doctorId})
         };
-        console.log(requestOptions.body);
         const response = await fetch(API_URL+"/api/doctor/login", requestOptions).then(async response => {
-          const data = await response.json();
-          console.log(data)
+          this.doctorResponse = await response.json();
+          this.doctorName = this.doctorResponse.name
+          console.log(this.doctorName)
           // check for error response
           if (!response.ok) {
             // get error message from body or default to response status
-            const error = (data && data.message) || response.status;
+            const error = (this.doctorResponse && this.doctorResponse.message) || response.status;
             return Promise.reject(error);
           }
         }).catch(error => {
           this.errorMessage = error;
           console.error('There was an error!', error);
         });
+        //await router.push({name: 'MyProfile'})
+        this.$router.replace('/doctor/profile/?Id=' + this.doctorId);
       }
       else{
         this.dialog=true;
