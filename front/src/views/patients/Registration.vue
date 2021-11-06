@@ -57,7 +57,7 @@
 
 <script>
 import DoctorNavBar from "../doctors/DoctorNavBar";
-let API_URL= 'https://d730-2806-2f0-9000-f884-3c43-128c-f17d-cfb9.ngrok.io';
+let API_URL= 'https://c775-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
 export default {
   name: "Registration",
   components:{
