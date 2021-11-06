@@ -4,7 +4,7 @@ import Registration from "../views/patients/Registration";
 import DoctorRegistration from "../views/doctors/DoctorRegistration";
 import Home from "../views/patients/Home";
 import MedicalHistory from "../views/patients/MedicalHistory";
-
+import MyPatients from "../views/doctors/MyPatients";
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,15 +19,24 @@ const routes = [
   {
     path: '/registration',
     name: 'Registration',
+    component: Registration
   },
   {
     path: '/doctorRegistration',
     name: 'DoctorRegistration',
+    component: DoctorRegistration
   },
   {
     path: '/medicalHistory',
     name: 'MedicalHistory',
-  }
+    component: MedicalHistory
+  },
+  {
+    path: '/myPatients',
+    name: 'MyPatients',
+    component: MyPatients
+  },
+
 ]
 
 const router = new VueRouter({
