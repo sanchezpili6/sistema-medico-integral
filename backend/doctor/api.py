@@ -1,7 +1,11 @@
 from app.urls import router
 import doctor
+
 from doctor.models import Doctor, Team
+
 from patients.models import Patient
+
+from prescription.models import Prescription
 
 
 from rest_framework import mixins, status, viewsets
@@ -87,6 +91,18 @@ class PatientsViewSet(ListModelMixin,
         pk = self.request.query_params.get('pk')
         return Patient.objects.filter(doctor=pk)
 
+class PrescriptionsViewSet(ListModelMixin,
+                           viewsets.GenericViewSet,
+                           BaseGenericViewSet):
+
+    list_serializer_class = serializers.RetrievePrescriptionSerializer
+
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        pk = self.request.query_params.get('pk')
+        return Prescription.objects.filter(doctor=pk)       
+
 
 router.register(
     r'doctor/create',
@@ -106,10 +122,14 @@ router.register(
     basename="doctor-team"
 )
 
-
-
 router.register(
     r'doctor/patients',
     PatientsViewSet,
     basename="doctor-patients"
+)
+
+router.register(
+    r'doctor/prescriptions',
+    PrescriptionsViewSet,
+    basename="doctor-prescriptions"
 )

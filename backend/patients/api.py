@@ -1,6 +1,7 @@
 from app.urls import router
 
 from patients.models import Patient
+from prescription.models import Prescription
 
 from rest_framework import mixins, status, viewsets
 from rest_framework.permissions import AllowAny
@@ -39,7 +40,7 @@ class PatientViewSet(ListModelMixin,
 class PatientLoginViewSet(viewsets.GenericViewSet,
                          BaseGenericViewSet):
 
-    list_serializer_class = serializers.PatientSerializer
+    serializer_class = serializers.PatientSerializer
 
     permission_classes = [AllowAny]
 
@@ -58,7 +59,22 @@ class PatientLoginViewSet(viewsets.GenericViewSet,
             data=serializer.data,
             status=status.HTTP_201_CREATED
         )
-    
+
+
+class PrescriptionsViewSet(ListModelMixin,
+                           viewsets.GenericViewSet,
+                           BaseGenericViewSet):
+
+    list_serializer_class = serializers.RetrievePrescriptionSerializer
+
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        pk = self.request.query_params.get('pk')
+        return Prescription.objects.filter(patient=pk) 
+
+
+
 router.register(
     r'patient/create',
     PatientViewSet,
@@ -70,3 +86,12 @@ router.register(
     PatientLoginViewSet,
     basename="patient-login"
 )
+
+router.register(
+    r'patient/prescriptions',
+    PrescriptionsViewSet,
+    basename="patient-prescriptions"
+)
+
+
+ 
