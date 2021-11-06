@@ -6,6 +6,7 @@ import Home from "../views/patients/Home";
 import MedicalHistory from "../views/patients/MedicalHistory";
 import MyPatients from "../views/doctors/MyPatients";
 import MyTeam from "../views/doctors/MyTeam";
+import MyProfile from "../views/doctors/MyProfile";
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,7 +43,11 @@ const routes = [
     name: 'MyTeam',
     component: MyTeam
   },
-
+  {
+    path: '/doctor/profile',
+    name: 'MyProfile',
+    component: MyProfile
+  },
 
 ]
 
