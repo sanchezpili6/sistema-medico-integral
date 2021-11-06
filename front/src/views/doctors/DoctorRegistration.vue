@@ -89,7 +89,7 @@ export default {
   computed:{  },
   methods:{
     async register(){
-      if(this.name!='' && this.specialty!='' && this.certificate && this.university && this.affiliation && this.team){
+      if(this.name!='' && this.specialty!='' && this.certificate!='' && this.university!='' && this.affiliation!='' && this.team!=''){
         this.dialog=false;
         // POST request using fetch with async/await
         const requestOptions = {
