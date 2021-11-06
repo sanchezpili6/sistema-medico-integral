@@ -1,3 +1,17 @@
 from django.contrib import admin
 
-# Register your models here.
+from patients.models import Patient
+
+
+class PatientAdmin(admin.ModelAdmin):
+    "Admin for Patients"
+
+    list_display = [
+        'pk',
+        'name',
+        'last_name',
+        'nss',
+        'policy',
+    ]
+
+admin.site.register(Patient, PatientAdmin)
