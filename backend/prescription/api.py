@@ -71,7 +71,7 @@ class PDFViewSet(mixins.CreateModelMixin,
         for treatement in treatments.iterator():
             response_treatments += (treatement.treatment)+','
         qr = qrcode.QRCode()
-        qr.add_data('http://localhost:8080/doctor/certificado/(prescription.doctor.certificate')
+        qr.add_data('http://localhost:8080/doctor/certificado/prescription.doctor.certificate')
         qr.make()
         img = qr.make_image()  
         img.save('qr.png') 
