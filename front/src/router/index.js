@@ -8,6 +8,7 @@ import MyPatients from "../views/doctors/MyPatients";
 import MyTeam from "../views/doctors/MyTeam";
 import MyProfile from "../views/doctors/MyProfile";
 import Welcome from "../views/Welcome";
+import Login from "../views/Login";
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,6 +47,11 @@ const routes = [
     path: '/doctor/profile',
     name: 'MyProfile',
     component: MyProfile
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
 
 ]

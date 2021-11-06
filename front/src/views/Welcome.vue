@@ -1,17 +1,6 @@
 <template>
   <v-container fluid class="ma-0 pa-0">
-    <v-app-bar color="green" elevation="2" flat>
-      <h1>SISTEMA MÉDICO INTEGRAL</h1>
-      <v-spacer></v-spacer>
-      <router-link style="text-decoration: none" to="/myPatients">
-        <v-btn><h2>INICIAR SESIÓN</h2></v-btn>
-      </router-link>
-      <v-spacer></v-spacer>
-      <router-link style="text-decoration: none" to="/myTeam">
-        <v-btn><h2>REGISTRARSE</h2></v-btn>
-      </router-link>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+    <NavBar></NavBar>
     <v-row>
       <v-col cols="6" class="my-5">
         <v-img
@@ -28,8 +17,12 @@
 </template>
 
 <script>
+import NavBar from "./NavBar";
 export default {
-  name: "Welcome"
+  name: "Welcome",
+  components:{
+    NavBar
+  }
 }
 </script>
 
