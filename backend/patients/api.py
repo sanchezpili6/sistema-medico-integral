@@ -10,15 +10,21 @@ from patients import serializers
 
 from utils.mixins import (
     BaseGenericViewSet,
+    ListModelMixin
 )
 
 
-class PatientViewSet(viewsets.GenericViewSet,
+class PatientViewSet(ListModelMixin,
+                     viewsets.GenericViewSet,
                      BaseGenericViewSet):
 
     serializer_class = serializers.PatientSerializer
 
     permission_classes = [AllowAny]
+
+    list_serializer_class = serializers.ListPatientSerializer
+
+    queryset = Patient.objects.all()
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -29,8 +35,6 @@ class PatientViewSet(viewsets.GenericViewSet,
             data=serializer.data,
             status=status.HTTP_201_CREATED
         )
-
-
 
 
         

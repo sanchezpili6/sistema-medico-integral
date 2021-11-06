@@ -45,10 +45,12 @@ class Team(models.Model):
         max_length=45,
         verbose_name='numero de equipo'
     )
+
     doctor = models.ManyToManyField(
         Doctor,
         verbose_name= 'Doctor',
         related_name= 'doctors'
+
     )
 
     class Meta:
