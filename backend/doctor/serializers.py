@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from doctor.models import Doctor, Team
 
+from patients.models import Patient
 
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,6 +10,11 @@ class DoctorSerializer(serializers.ModelSerializer):
         model = Doctor
         fields = '__all__'
 
+class PatientsSerializer(serializers.ModelSerializer):
+    class Meta:
+        """Define the class behavior"""
+        model = Patient
+        fields = '__all__'
 
 class ListDoctorSerializer(serializers.ModelSerializer):
 
