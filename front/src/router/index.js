@@ -9,6 +9,7 @@ import MyTeam from "../views/doctors/MyTeam";
 import MyProfile from "../views/doctors/MyProfile";
 import Welcome from "../views/Welcome";
 import Login from "../views/Login";
+import Prescription from "../views/doctors/Prescription";
 Vue.use(VueRouter)
 
 const routes = [
@@ -53,7 +54,12 @@ const routes = [
     name: 'Login',
     component: Login
   },
-
+  {
+    path: '/prescription',
+    name: 'Prescription',
+    component: Prescription,
+    props: true
+  },
 ]
 
 const router = new VueRouter({

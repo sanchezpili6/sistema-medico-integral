@@ -53,6 +53,10 @@ class TeamViewSet(ListModelMixin,
 
 
 
+# recibir el nss del paciente y hacer la realcion 
+
+# iniciar sesion regresar el id 
+
 router.register(
     r'doctor/create',
     DoctorViewSet,

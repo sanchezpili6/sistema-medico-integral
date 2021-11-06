@@ -34,9 +34,9 @@
             <v-list-item>
               Nombre médico: {{receta.doctor}}
             </v-list-item>
-            <v-list-item>
+            <!--v-list-item>
               Último tratamiento: {{receta.lastTreatment}}
-            </v-list-item>
+            </v-list-item-->
             <v-list-item>
               Medicamento recetado: {{receta.medicine}}
             </v-list-item>
