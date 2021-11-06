@@ -37,7 +37,8 @@
         </v-simple-table>
       </v-card-text>
     </v-card>
-    <router-link to="/registration">
+    <!--router-link to="/registration" :docID="docId"-->
+    <router-link :to="{name:'Registration', params:{docID: docId}}">
       <v-btn
           absolute
           fab
@@ -62,6 +63,7 @@ export default {
   },
   data () {
     return {
+      docId:3,
       patients: [
         {
           name: 'Jackie bb',
