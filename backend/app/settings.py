@@ -41,7 +41,7 @@ LOCAL_APPS = [
      'history',
      'patients',
      'prescription',
-     'record'
+     'doctor'
 ]
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -140,7 +140,9 @@ JWT_AUTH_HEADER_PREFIX = 'Bearer'
 
 ALLOWED_HOSTS = [
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'c355-2806-2f0-9000-f884-3c43-128c-f17d-cfb9.ngrok.io'
+
 ]
 
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
