@@ -5,9 +5,9 @@
       <v-col class="mb-1">
         <v-dialog v-model="dialog" width="500">
           <v-card>
-            <v-card-title>Faltan datos</v-card-title>
+            <v-card-title>ERROR</v-card-title>
             <v-card-text>
-              Por favor asegúrese de llenar todos los campos o que no esté ya registrado
+              Por favor asegúrese de llenar todos los campos y que el no. de cédula sea correcta
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -63,7 +63,7 @@
 
 <script>
 import router from "../router";
-let API_URL= 'https://6719-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
+let API_URL= 'https://9d9f-2806-2f0-9000-f884-cdbc-861c-b45f-61a3.ngrok.io';
 import NavBar from "./NavBar";
 export default {
   name: "Login",
@@ -92,7 +92,7 @@ export default {
     },
     doctorResponse(newDoctorName){
       localStorage.doctorName = newDoctorName
-    }
+    },
   },
   methods:{
     async login_doctor(){
@@ -114,12 +114,15 @@ export default {
             const error = (this.doctorResponse && this.doctorResponse.message) || response.status;
             return Promise.reject(error);
           }
+      else{
+            //await router.push({name: 'MyProfile'})
+            this.$router.replace('/doctor/profile/?Id=' + this.doctorId);
+          }
         }).catch(error => {
+          this.dialog=true;
           this.errorMessage = error;
           console.error('There was an error!', error);
         });
-        //await router.push({name: 'MyProfile'})
-        this.$router.replace('/doctor/profile/?Id=' + this.doctorId);
       }
       else{
         this.dialog=true;

@@ -6,14 +6,14 @@
       <v-col class="mb-4 pa-15">
         <v-dialog v-model="dialog" width="500">
           <v-card>
-            <v-card-title>Faltan datos</v-card-title>
+            <v-card-title>ERROR</v-card-title>
             <v-card-text>
-              Por favor asegúrese de llenar el tratamiento
+              Por favor asegúrese de llenar el campo de tratamiento
             </v-card-text>
           </v-card>
         </v-dialog>
         <v-card class="mx-auto my-10" max-width="600">
-          <v-card-title>AGREGAR TRATAMIENTO</v-card-title>
+          <v-card-title>AGREGAR TRATAMIENTO A: {{this.patientName}}</v-card-title>
           <v-row>
             <v-col cols="3">
               <v-card-text>Tratamiento</v-card-text>
@@ -33,18 +33,26 @@
 
 <script>
 import DoctorNavBar from "../doctors/DoctorNavBar";
-let API_URL= 'https://16fe-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
+import router from "../../router";
+let API_URL= 'https://9d9f-2806-2f0-9000-f884-cdbc-861c-b45f-61a3.ngrok.io';
 export default {
   name: "Prescription",
   components:{
     DoctorNavBar
   },
+  created() {
+    this.docID=localStorage.getItem('bdID');
+    this.patientID=localStorage.getItem('patientID');
+    this.patientName=localStorage.getItem('patientName');
+    console.log('From Prescription docID: '+ this.docID+' patientID:'+this.patientID)
+  },
   props: {
     //docID: Number,
   },
   data: () => ({
-    docID:9,
-    patientID:2,
+    docID:'',
+    patientID:'',
+    patientName:'',
     treatment: '',
     postId: -1,
     dialog: false,
@@ -68,13 +76,17 @@ export default {
           console.log(data);
           // check for error response
           if (!response.ok) {
+            this.dialog=true
             // get error message from body or default to response status
             const error = (data && data.message) || response.status;
             return Promise.reject(error);
+          }else{
+            localStorage.setItem('prescriptionID', data.pk)
+            await router.push({name: 'PDFPrescription'})
           }
-
           this.postId = data.id;
         }).catch(error => {
+          this.dialog=true
           this.errorMessage = error;
           console.error('There was an error!', error);
         });

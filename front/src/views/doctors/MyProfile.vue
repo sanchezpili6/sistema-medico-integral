@@ -53,17 +53,20 @@
 </template>
 
 <script>
-let API_URL= 'https://6719-2806-2f0-9000-f884-c94c-ca23-2152-3e52.ngrok.io';
+let API_URL= 'https://9d9f-2806-2f0-9000-f884-cdbc-861c-b45f-61a3.ngrok.io';
 import DoctorNavBar from "./DoctorNavBar";
 export default {
   name: "MyProfile",
   components:{
     DoctorNavBar
   },
-  mounted() {
-    if (localStorage.doctorId) {
-      this.doctorId = localStorage.doctorId;
-    }
+  watch:{
+    doctorId(newDoctorId){
+      localStorage.doctorId = newDoctorId
+    },
+    doctorResponse(newDoctorName){
+      localStorage.doctorName = newDoctorName
+    },
   },
   async created() {
         // POST request using fetch with async/await
@@ -76,17 +79,22 @@ export default {
         console.log(this.doctorId)
         const response =  await fetch(API_URL+"/api/doctor/login", requestOptions).then(async response => {
           this.doctorResponse = await response.json();
+          this.bdID = this.doctorResponse.id
           this.name = this.doctorResponse.name
           this.specialty = this.doctorResponse.specialty
           this.college = this.doctorResponse.university
           this.affiliation = this.doctorResponse.affiliation
           this.doctorId = this.doctorResponse.certificate
           console.log(this.doctorResponse)
+          localStorage.setItem('bdID', this.bdID)
           // check for error response
           if (!response.ok) {
             // get error message from body or default to response status
             const error = (this.doctorResponse && this.doctorResponse.message) || response.status;
             return Promise.reject(error);
+          }
+          else{
+            localStorage.setItem('ID', doctorId)
           }
         }).catch(error => {
           this.errorMessage = error;
@@ -100,6 +108,7 @@ export default {
       specialty: '',
       college: '',
       affiliation: '',
+      bdID:'',
       recetas:[
         { patient: 'Fersito',
           doctor: 'Pili',

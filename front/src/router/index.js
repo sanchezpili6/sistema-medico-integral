@@ -10,6 +10,7 @@ import MyProfile from "../views/doctors/MyProfile";
 import Welcome from "../views/Welcome";
 import Login from "../views/Login";
 import Prescription from "../views/doctors/Prescription";
+import PDFPrescription from "../views/doctors/PDFPrescription";
 Vue.use(VueRouter)
 
 const routes = [
@@ -53,6 +54,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/pdf',
+    name: 'PDFPrescription',
+    component: PDFPrescription
   },
   {
     path: '/prescription',
