@@ -73,7 +73,7 @@
 </template>
 
 <script>
-let API_URL= 'https://d730-2806-2f0-9000-f884-3c43-128c-f17d-cfb9.ngrok.io';
+let API_URL= 'https://9d9f-2806-2f0-9000-f884-cdbc-861c-b45f-61a3.ngrok.io';
 export default {
   name: "DoctorRegistration",
   data: () => ({

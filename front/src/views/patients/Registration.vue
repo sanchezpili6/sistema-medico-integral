@@ -13,7 +13,7 @@
           </v-card>
         </v-dialog>
         <v-card class="mx-auto my-10" max-width="600">
-          <v-card-title>REGISTRO PACIENTE {{this.$props.docID}}</v-card-title>
+          <v-card-title>REGISTRO PACIENTE</v-card-title>
           <v-row>
             <v-col cols="3">
               <v-card-text>Nombre(s)</v-card-text>
@@ -57,14 +57,12 @@
 
 <script>
 import DoctorNavBar from "../doctors/DoctorNavBar";
-let API_URL= 'https://d730-2806-2f0-9000-f884-3c43-128c-f17d-cfb9.ngrok.io';
+import router from "../../router";
+let API_URL= 'https://9d9f-2806-2f0-9000-f884-cdbc-861c-b45f-61a3.ngrok.io';
 export default {
   name: "Registration",
   components:{
     DoctorNavBar
-  },
-  props: {
-    docID: Number,
   },
   data: () => ({
     apellidos: '',
@@ -77,6 +75,9 @@ export default {
   computed:{
 
   },
+  created() {
+    console.log(localStorage.getItem('bdID'));
+  },
   methods:{
     async register(){
       if(this.nombre!='' && this.apellidos!='' && this.nss!='' && this.poliza!=''){
@@ -85,7 +86,7 @@ export default {
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({name: this.nombre, last_name: this.apellidos, nss: this.nss, policy:this.poliza, doctor: this.$props.docID})
+          body: JSON.stringify({name: this.nombre, last_name: this.apellidos, nss: this.nss, policy:this.poliza, doctor: localStorage.getItem('bdID')})
         };
         console.log(requestOptions.body);
         const response = await fetch(API_URL+"/api/patient/create", requestOptions).then(async response => {
@@ -96,14 +97,17 @@ export default {
             const error = (data && data.message) || response.status;
             return Promise.reject(error);
           }
-
+          else{
+            await router.push({name: 'MyPatients'})
+          }
           this.postId = data.id;
         }).catch(error => {
+            this.dialog=true;
               this.errorMessage = error;
               console.error('There was an error!', error);
             });
 
-        console.log(this.nombre+" "+ this.apellidos+" "+this.nss+" "+ this.poliza+" "+this.$props.docID);
+        console.log(this.nombre+" "+ this.apellidos+" "+this.nss+" "+ this.poliza+" "+localStorage.getItem('bdID'));
       }
       else{
         this.dialog=true;
