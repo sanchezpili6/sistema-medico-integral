@@ -44,7 +44,7 @@
               Cédula profesional: {{receta.license}}
             </v-list-item>
           </v-list>
-          <v-btn color="green">IMPRIMIR PDF</v-btn>
+          <v-btn color="green" @click="viewPDF()">IMPRIMIR PDF</v-btn>
         </v-card-text>
       </v-card>
       <v-spacer></v-spacer>
@@ -53,12 +53,15 @@
 </template>
 
 <script>
+import pdf from 'vue-pdf'
 let API_URL= 'https://9d9f-2806-2f0-9000-f884-cdbc-861c-b45f-61a3.ngrok.io';
+let getPDF= 'https://583c-2806-2f0-9000-f884-c013-4193-53ee-aa14.ngrok.io/';
 import DoctorNavBar from "./DoctorNavBar";
 export default {
   name: "MyProfile",
   components:{
-    DoctorNavBar
+    DoctorNavBar,
+    pdf
   },
   watch:{
     doctorId(newDoctorId){
@@ -137,6 +140,11 @@ export default {
       ]
     }
   },
+  methods:{
+    viewPDF(){
+      window.location.href = "https://paraimprimir.org/wp-content/uploads/2014/03/Formato-de-receta-medica-para-imprimir.pdf"
+    }
+  }
 }
 </script>
 

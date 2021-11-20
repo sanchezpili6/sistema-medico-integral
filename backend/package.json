@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pdfjs-dist": "^2.6.347",
+    "vue-pdf": "^4.3.0"
+  }
+}
